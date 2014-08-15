@@ -1,8 +1,7 @@
 debconf-set-selections <<< 'mysql-server-5.5 mysql-server/root_password password 123'
 debconf-set-selections <<< 'mysql-server-5.5 mysql-server/root_password_again password 123'
 
-cat /vagrant/hosts >> /etc/hosts
-echo "$3 $1" >> /etc/hosts
+echo "$2 $1" >> /etc/hosts
 
 printf "Running Update"
 apt-get update > /dev/null 2>&1
@@ -24,9 +23,9 @@ sed -i '/error_reporting = E_ALL & ~E_DEPRECATED/c error_reporting = E_ALL | E_S
 cp /vagrant/vhost /etc/apache2/sites-available/site.conf
 echo "User vagrant" >> /etc/apache2/apache2.conf
 echo "Group vagrant" >> /etc/apache2/apache2.conf
+chown vagrant: /var/www
 
 printf "Enable Site"
-chown vagrant: /var/www
 a2enmod rewrite > /dev/null 2>&1
 a2ensite site.conf > /dev/null 2>&1
 a2dissite 000-default.conf > /dev/null 2>&1
