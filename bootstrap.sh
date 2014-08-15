@@ -1,12 +1,8 @@
-hostname = $1
-public_folder = $2
-ip = $3
-
 debconf-set-selections <<< 'mysql-server-5.5 mysql-server/root_password password 123'
 debconf-set-selections <<< 'mysql-server-5.5 mysql-server/root_password_again password 123'
 
 cat /vagrant/hosts >> /etc/hosts
-cat "$3 $1" >> /etc/hosts
+echo "$3 $1" >> /etc/hosts
 
 printf "Running Update"
 apt-get update > /dev/null 2>&1
