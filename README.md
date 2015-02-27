@@ -1,4 +1,4 @@
 tinyvag
 =======
 
-Tiny Vagrant LAMP Stack with only Bash
+Tiny Vagrant LAMP Stack with only Bash Provisioning
