@@ -7,5 +7,6 @@
             "email": "justin@justinhilles.com"
         }
     ],
-    "require": {}
+    "require": {},
+    "bin": ["Vagrantfile"]
 }

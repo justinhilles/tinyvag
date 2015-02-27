@@ -1,6 +1,6 @@
 hostname = "site.localhost"
 bootstrap_file = "bootstrap.sh"
-shared_folder = "../."
+shared_folder = "../../../."
 public_folder = "/var/www/html/site"
 ip = "192.168.56.101"
 memory = 2048
