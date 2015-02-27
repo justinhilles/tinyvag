@@ -8,5 +8,8 @@
         }
     ],
     "require": {},
-    "bin": ["Vagrantfile"]
+    "bin": ["Vagrantfile"],
+    "config": {
+        "bin-dir": "vagrant"
+    }
 }
