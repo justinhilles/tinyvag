@@ -8,5 +8,5 @@
         }
     ],
     "require": {},
-    "bin": ["Vagrantfile","bootstrap.sh","database","vhost"],
+    "bin": ["Vagrantfile","bootstrap.sh","database","vhost"]
 }
