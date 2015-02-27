@@ -1,0 +1,11 @@
+{
+    "name": "justinhilles/tinyvag",
+    "description": "Tiny Vagrant Build in Bash",
+    "authors": [
+        {
+            "name": "Justin Hilles",
+            "email": "justin@justinhilles.com"
+        }
+    ],
+    "require": {}
+}
