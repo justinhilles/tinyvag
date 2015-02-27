@@ -1,7 +1,0 @@
-CREATE DATABASE IF NOT EXISTS `site`;
-
-CREATE USER 'site'@'localhost' IDENTIFIED BY '123';
-
-GRANT ALL ON `site`.* TO 'site'@'localhost';
-
-FLUSH PRIVILEGES;
