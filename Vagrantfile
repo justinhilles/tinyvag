@@ -8,8 +8,8 @@ $ip = "192.168.56.101"
 $memory = 2048
 $box = "ubuntu/trusty64"
 
-if File.exist?("../config.rb")
-    require "../config.rb"
+if File.exist?("config.rb")
+    require "config.rb"
 end
 
 Vagrant.configure("2") do |config|
