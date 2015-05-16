@@ -1,7 +1,7 @@
 $pwd = File.basename(File.expand_path(Dir.pwd))
 $hostname = $pwd << ".localhost"
 $bootstrap_file = "vendor/justinhilles/tinyvag/bootstrap.sh"
-$shared_folder = "../."
+$shared_folder = "./"
 $public_folder = "/var/www/html/site"
 $document_root = $public_folder
 $ip = "192.168.56.101"
