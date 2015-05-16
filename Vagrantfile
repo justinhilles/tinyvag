@@ -14,7 +14,7 @@ end
 
 Vagrant.configure("2") do |config|
     config.vm.box = $box
-    config.vm.network :private_network, ip: $ip
+    config.vm.network "private_network", type: "dhcp"
     config.vm.synced_folder $shared_folder, $public_folder
     config.vm.host_name = $hostname
 
