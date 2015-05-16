@@ -8,5 +8,8 @@
         }
     ],
     "require": {},
-    "bin": ["Vagrantfile","bootstrap.sh"]
+    "bin": ["Vagrantfile","bootstrap.sh"],
+    "config" : {
+        "bin-dir" : "./vagrant"
+    }
 }
