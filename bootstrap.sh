@@ -1,5 +1,7 @@
 [[ -z $1 ]] && { echo "!!! Hostname not set. Check the Vagrant file."; exit 1; }
 
+sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 7F0CEB10
+echo "deb http://repo.mongodb.org/apt/ubuntu "$(lsb_release -sc)"/mongodb-org/3.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-3.0.list
 debconf-set-selections <<< 'mysql-server-5.5 mysql-server/root_password password 123'
 debconf-set-selections <<< 'mysql-server-5.5 mysql-server/root_password_again password 123'
 
