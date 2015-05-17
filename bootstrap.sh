@@ -2,17 +2,19 @@
 
 debconf-set-selections <<< 'mysql-server-5.5 mysql-server/root_password password 123'
 debconf-set-selections <<< 'mysql-server-5.5 mysql-server/root_password_again password 123'
+echo "deb http://downloads-distro.mongodb.org/repo/ubuntu-upstart dist 10gen" | tee -a /etc/apt/sources.list.d/10gen.list
 
 echo "$2 $1" >> /etc/hosts
 
 echo "Running Update"
-apt-get update
+apt-get -y update
 
 echo "Running Upgrade"
-apt-get upgrade
+apt-get -y upgrade
 
 echo "Installing Packages"
-apt-get -y -q install python-software-properties build-essential apache2 mysql-server libapache2-mod-auth-mysql libapache2-mod-php5 php5 php5-mysql php5-mcrypt php5-memcached php5-curl memcached libmemcached-tools libmemcached-dev libcurl3 libcurl4-gnutls-dev curl vim wget git default-jre
+apt-key adv --keyserver keyserver.ubuntu.com --recv 7F0CEB10
+apt-get -y -q install python-software-properties build-essential apache2 mysql-server mongodb-10gen libapache2-mod-auth-mysql libapache2-mod-php5 php5 php5-mysql php5-mcrypt php5-memcached php5-curl php5-sqlite php5-gd memcached libmemcached-tools libmemcached-dev libcurl3 libcurl4-gnutls-dev curl vim wget git default-jre
 curl -sS https://getcomposer.org/installer | php && sudo mv composer.phar /usr/local/bin/composer
 gem install sass
 
