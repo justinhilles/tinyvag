@@ -3,7 +3,7 @@ $cfg = 'app/vagrant.yml'
 
 data = {
     'hostname'  => $pwd << '.dev',
-    'bootstrap' => 'bootstrap.sh',
+    'bootstrap' => 'vendor/justinhilles/tinyvag/bootstrap.sh',
     'shared'    => './',
     'public'    => '/var/www/html/site',
     'mem'       => 2048,
