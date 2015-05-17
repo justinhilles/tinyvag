@@ -19,7 +19,7 @@ curl -sS https://getcomposer.org/installer | php && sudo mv composer.phar /usr/l
 gem install sass
 
 echo "Configuring Packages"
-mysql -uroot -p123 -e 'CREATE DATABASE IF NOT EXISTS `site`;CREATE USER `site`@`%` IDENTIFIED BY "123";GRANT ALL ON `site`.* TO `site`@`%`;FLUSH PRIVILEGES;'
+mysql -uroot -p123 -e 'CREATE DATABASE IF NOT EXISTS `site`;CREATE USER `site`@`localhost` IDENTIFIED BY "123";GRANT ALL ON `site`.* TO `site`@`localhost`;CREATE USER `site`@"%" IDENTIFIED BY "123";GRANT ALL ON `site`.* TO `site`@"%";FLUSH PRIVILEGES;'
 
 sed -i '/display_errors = Off/c display_errors = On' /etc/php5/apache2/php.ini
 sed -i '/display_errors = Off/c display_errors = On' /etc/php5/cli/php.ini
