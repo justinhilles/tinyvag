@@ -13,7 +13,7 @@ data = {
 
 if File.exist?($cfg)
     require 'yaml'
-    data = data | YAML::load(File.open($cfg))
+    data.merge(YAML::load(File.open($cfg)))
 end
 
 Vagrant.configure('2') do |config|
