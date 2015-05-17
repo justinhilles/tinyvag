@@ -10,6 +10,6 @@
     "require": {},
     "bin": ["Vagrantfile","bootstrap.sh"],
     "config" : {
-        "bin-dir" : "./vagrant"
+        "bin-dir" : "./"
     }
 }
