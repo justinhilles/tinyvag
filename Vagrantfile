@@ -1,10 +1,10 @@
 $pwd = File.basename(File.expand_path(Dir.pwd))
-$cfg = 'app/vagrant.yml'
+$cfg = '../app/tinyvag.yml'
 
 data = {
     'hostname'  => $pwd << '.dev',
-    'bootstrap' => 'vendor/justinhilles/tinyvag/bootstrap.sh',
-    'shared'    => './',
+    'bootstrap' => '../vendor/justinhilles/tinyvag/bootstrap.sh',
+    'shared'    => '../.',
     'public'    => '/var/www/html/site',
     'mem'       => 2048,
     'cpus'      => 4,
