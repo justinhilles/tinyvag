@@ -1,8 +1,8 @@
-$pwd = File.basename(File.expand_path(Dir.pwd))
+$pwd = File.basename(File.expand_path(Dir.pwd + "/../."))
 $cfg = '../app/tinyvag.yml'
 
 data = {
-    'hostname'  => $pwd << '.dev',
+    'hostname'  => $pwd << '.vag',
     'bootstrap' => '../vendor/justinhilles/tinyvag/bootstrap.sh',
     'shared'    => '../.',
     'public'    => '/var/www/html/site',
