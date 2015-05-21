@@ -8,10 +8,10 @@ debconf-set-selections <<< 'mysql-server-5.5 mysql-server/root_password_again pa
 echo "$2 $1" >> /etc/hosts
 
 echo "Running Update"
-apt-get -y update
+apt-get -y update > /dev/null 2>&1
 
 echo "Running Upgrade"
-apt-get -y upgrade
+apt-get -y upgrade > /dev/null 2>&1
 
 echo "Installing Packages"
 apt-get -y -q install python-software-properties build-essential apache2 mysql-server mongodb-org libapache2-mod-auth-mysql libapache2-mod-php5 php5 php5-mysql php5-mcrypt php5-memcached php5-curl php5-sqlite php5-gd memcached libmemcached-tools libmemcached-dev libcurl3 libcurl4-gnutls-dev curl vim wget git default-jre
@@ -26,7 +26,7 @@ sed -i '/display_errors = Off/c display_errors = On' /etc/php5/cli/php.ini
 sed -i '/short_open_tag = Off/c short_open_tag = On' /etc/php5/apache2/php.ini
 sed -i '/short_open_tag = Off/c short_open_tag = On' /etc/php5/cli/php.ini
 sed -i '/error_reporting = E_ALL & ~E_DEPRECATED/c error_reporting = E_ALL | E_STRICT' /etc/php5/apache2/php.ini
-sed -i "s/bind-address.*/bind-address = 0.0.0.0/" /etc/mysql/my.cnf
+sed -i "s/bind-address.*/#bind-address = 127.0.0.1/" /etc/mysql/my.cnf
 echo "<VirtualHost *:80>
     ServerName $1
     DocumentRoot $3
@@ -46,6 +46,6 @@ echo "Enable Site"
 a2enmod rewrite > /dev/null 2>&1
 a2ensite 000-default.conf > /dev/null 2>&1
 service apache2 reload > /dev/null 2>&1
-service mysql reload > /dev/null 2>&1
+service mysql restart > /dev/null 2>&1
 
 echo "Done!"
