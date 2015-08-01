@@ -1,9 +1,11 @@
 $pwd = File.basename(File.expand_path(Dir.pwd + "/../."))
-$cfg = '../app/tinyvag.yml'
+$cfg = ['../app/vagrant.yml', '../vagrant.yml', 'vagrant.yml']
+$hostname = $pwd << '.vagrant'
+@default_file = '../vendor/justinhilles/tinyvag/bootstrap.sh'
 
 data = {
-    'hostname'  => $pwd << '.vag',
-    'bootstrap' => '../vendor/justinhilles/tinyvag/bootstrap.sh',
+    'hostname'  => $hostname,
+    'provision' => {@default_file => []},
     'shared'    => '../.',
     'public'    => '/var/www/site',
     'doc_root'  => '/var/www/site',
@@ -12,11 +14,16 @@ data = {
     'box'       => 'ubuntu/trusty64'
 }
 
-if File.exist?($cfg)
-puts $cfg
-    require 'yaml'
-    data.merge!(YAML::load(File.open($cfg)))
+$cfg.each do |file|
+    puts "Finding File #{file}"
+    if File.exist?(file)
+        puts "Found #{file}"
+        require 'yaml'
+        data.merge!(YAML::load(File.open(file)))
+    end
 end
+
+data['provision'][@default_file] = [data['hostname'], '127.0.0.1', data['doc_root']]
 
 puts data
 
@@ -28,7 +35,7 @@ Vagrant.configure('2') do |config|
     if data.has_key?('ip')
         config.vm.network "private_network", ip: data['ip']
     else
-        config.vm.network 'private_network', type: 'dhcp'
+        config.vm.network "private_network", type: 'dhcp'
     end
 
     config.vm.provider :virtualbox do |v|
@@ -38,5 +45,9 @@ Vagrant.configure('2') do |config|
         v.customize ['modifyvm', :id, '--cpus', data['cpus']]
     end
 
-    config.vm.provision :shell, :path => data['bootstrap'], args: [data['hostname'], '127.0.0.1', data['doc_root']]
+    data['provision'].each do |bootstrap, arguments|
+        puts "Running '#{bootstrap}' with #{arguments}"
+
+        config.vm.provision "shell", path: bootstrap, args: arguments
+    end
 end
