@@ -5,12 +5,12 @@ $hostname = $pwd << '.vagrant'
 
 data = {
     'hostname'  => $hostname,
-    'provision' => {@default_file => []},
+    'provision' => {},
     'shared'    => '../.',
     'public'    => '/var/www/site',
     'doc_root'  => '/var/www/site',
-    'mem'       => 2048,
-    'cpus'      => 4,
+    'mem'       => 1024,
+    'cpus'      => 1,
     'box'       => 'ubuntu/trusty64'
 }
 
@@ -19,11 +19,13 @@ $cfg.each do |file|
     if File.exist?(file)
         puts "Found #{file}"
         require 'yaml'
+        puts YAML::load(File.open(file))
         data.merge!(YAML::load(File.open(file)))
     end
 end
 
 data['provision'][@default_file] = [data['hostname'], '127.0.0.1', data['doc_root']]
+data['provision'] = data['provision'].merge(data['provision_extra'])
 
 puts data
 
@@ -46,8 +48,9 @@ Vagrant.configure('2') do |config|
     end
 
     data['provision'].each do |bootstrap, arguments|
-        puts "Running '#{bootstrap}' with #{arguments}"
-
-        config.vm.provision "shell", path: bootstrap, args: arguments
+        if File.exist?(bootstrap)
+            puts "Running '#{bootstrap}' with #{arguments}"
+            config.vm.provision "shell", path: bootstrap, args: arguments
+        end
     end
 end
