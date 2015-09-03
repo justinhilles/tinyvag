@@ -11,7 +11,8 @@ data = {
     'doc_root'  => '/var/www/site',
     'mem'       => 1024,
     'cpus'      => 1,
-    'box'       => 'ubuntu/trusty64'
+    'box'       => 'ubuntu/trusty64',
+    'provision_extra' => {}
 }
 
 $cfg.each do |file|
@@ -23,6 +24,7 @@ $cfg.each do |file|
         data.merge!(YAML::load(File.open(file)))
     end
 end
+
 
 data['provision'][@default_file] = [data['hostname'], '127.0.0.1', data['doc_root']]
 data['provision'] = data['provision'].merge(data['provision_extra'])
